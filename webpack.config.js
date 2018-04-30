@@ -6,7 +6,7 @@ const path = require('path')
 //check dev
 
 module.exports = {
-    entry: path.resolve(__dirname, './src/Root.jsx'),
+    entry: path.resolve(__dirname, './src/app.jsx'),
     output: {
         filename: "./bundle/bundle.js",
         library: 'todolist'

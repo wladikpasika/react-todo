@@ -1,0 +1,6 @@
+.fa-times:before{color:red}
+.fa-edit:before {
+    content: "\f044";
+    margin:5px;
+    color: blueviolet;
+}
