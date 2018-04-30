@@ -5,16 +5,9 @@ class Controls extends Component {
   constructor(props, context, updater) {
     super(props, context, updater);
 
-    this.state = "";
+    this.state = { value: '' };
     this.handleInput = this.handleInput.bind(this);
     this.handlePress = this.handlePress.bind(this);
-  }
-
-  clearInput(){
-    if(!this.state){
-      return "";
-    }
-      return this.state.value;
   }
 
   handleInput(event) {
@@ -25,16 +18,18 @@ class Controls extends Component {
   handlePress() {
     const { value } = this.state;
     this.props.onPress(value);
-    this.setState({ value: "" });
+    this.setState({ value: '' });
   }
 
   render() {
+    const { value } = this.state;
+
     return (
       <div>
         <input
           placeholder = "Enter task"
           onChange = {this.handleInput}
-          value = {this.clearInput()}
+          value = {value}
         />
         <button
           onClick={this.handlePress}

@@ -9,8 +9,8 @@ class Root extends Component {
     super();
     this.state = {tasks:{}};
     this.counterForState = null;
-    this.clickOnListHandler = this.handlerClickOnList.bind(this); //bind context
-    this.addItemToState = (value) => {
+    this.handleSelectItem = this.handlerClickOnList.bind(this); //bind context
+    this.handleAddItem = (value) => {
 
       if(this.counterForState === null){ //check counterForState if null, set number 0, else - use incremnt 
         this.counterForState = 0;
@@ -26,6 +26,8 @@ class Root extends Component {
   }
 }
 
+
+
   removeItemFromState(keyId){
     
     let newState = {...this.state.tasks}; //temporary state for a copy state
@@ -39,7 +41,7 @@ class Root extends Component {
 
   editItemFromState(value,keyId){
     
-    let newState = {...this.state.tasks}; //temporary state for a copy state
+    let newState = {...this.state.tasks}; //temporary state for a copy state 
 
       if(newState[keyId]){
         newState[keyId] = value;
@@ -48,7 +50,7 @@ class Root extends Component {
       };
   };
 
-  handlerClickOnList(event,keyId){
+ /* handlerClickOnList(event,keyId){//edit this, separate on different function  onEdit, onRemove
     event.persist(); // important - save event object!
   
     if (event.target.className === 'fas fa-times close') {
@@ -63,13 +65,17 @@ class Root extends Component {
       }
       else { alert('Empty string') }
     }
-  }
+  }*/
 
   render() {
     return (
       <div>
-        <Controls onPress = {this.addItemToState}/>
-        <List tasks = {this.state.tasks} changeList = {this.clickOnListHandler}/>
+        <Controls onPress = {this.handleAddItem}/>
+        <List
+          tasks={this.state.tasks}
+          onEdit={this.editItemFromState}
+          onRemove={this.removeItemFromState}
+        />
       </div>
     );
   }
