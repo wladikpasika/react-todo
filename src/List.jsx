@@ -1,38 +1,37 @@
 import React, { Component } from 'react';
+import listStyles from './css/list.css' 
 
 class List extends Component {
 
-  /*handlerClickOnList(event,keyId){//edit this, separate on different function  onEdit, onRemove
-    event.persist(); // important - save event object!
-  
-    if (event.target.className === 'fas fa-times close') {
-      //remove item from object
-      this.removeItemFromState(keyId);
-    }
-    else if (event.target.className === 'far fa-edit edit') {
-      const result = prompt("Сhange the task, please", event.target.parentElement.textContent);
-      if (result||result.length > 0) {
-        //edit task
-        this.editItemFromState(result,keyId);
+
+  getEditPrompt(event){
+    const result = prompt("Сhange the task, please", event.target.parentElement.textContent);
+      if (result&&result.length > 0) {
+        return result;
       }
-      else { alert('Empty string') }
+      else {
+         alert('Empty string') 
     }
-  }*/
-
-
+  }
   render(){
-    
+
     let Li = (
     <div>
       {
         ((tasks) => { //bind context to this - arrow function
-          let array = [];
+          const array = [];
           for (let task in tasks){//important use let, let copy variable each iteration
             array.push (
-            <li key = {task} onClick = { event => this.props.onList(event, task) }> 
+            <li key = {task} > 
             {tasks[task]} 
-                  <i className="far fa-edit edit"></i>
-                  <i className="fas fa-times close"></i>  
+                  <i className="far fa-edit edit" onClick = { event => {
+                    const text = this.getEditPrompt(event);
+                    return text?this.props.onEdit(text, task):false
+                    }
+                  }></i>
+                  <i className="fas fa-times close" onClick = {() => {
+                    return this.props.onRemove(task);
+                  }}></i>  
             </li>);
           }
           return array;
@@ -47,7 +46,6 @@ class List extends Component {
       </ul>
     );
   }
-  
 }
 
 export default List;

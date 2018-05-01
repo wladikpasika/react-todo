@@ -5,12 +5,13 @@ import  Controls from './Controls';
 import  List from './List';
 
 class Root extends Component {
-  constructor(){
-    super();
-    this.state = {tasks:{}};
-    this.counterForState = null;
-    this.handleSelectItem = this.handlerClickOnList.bind(this); //bind context
-    this.handleAddItem = (value) => {
+    state = {
+      tasks:{
+
+      }
+    };
+    counterForState = null;
+    handleAddItem = (value) => {
 
       if(this.counterForState === null){ //check counterForState if null, set number 0, else - use incremnt 
         this.counterForState = 0;
@@ -24,12 +25,8 @@ class Root extends Component {
         this.setState({tasks:newState}); 
     }
   }
-}
-
-
-
-  removeItemFromState(keyId){
-    
+  removeItemFromState = (keyId) => {
+   
     let newState = {...this.state.tasks}; //temporary state for a copy state
 
       if(newState[keyId]){
@@ -39,9 +36,9 @@ class Root extends Component {
       };
   };
 
-  editItemFromState(value,keyId){
+  editItemFromState = (value,keyId) => {
     
-    let newState = {...this.state.tasks}; //temporary state for a copy state 
+    const newState = {...this.state.tasks}; //temporary state for a copy state 
 
       if(newState[keyId]){
         newState[keyId] = value;
@@ -49,24 +46,6 @@ class Root extends Component {
         )
       };
   };
-
- /* handlerClickOnList(event,keyId){//edit this, separate on different function  onEdit, onRemove
-    event.persist(); // important - save event object!
-  
-    if (event.target.className === 'fas fa-times close') {
-      //remove item from object
-      this.removeItemFromState(keyId);
-    }
-    else if (event.target.className === 'far fa-edit edit') {
-      const result = prompt("Сhange the task, please", event.target.parentElement.textContent);
-      if (result||result.length > 0) {
-        //edit task
-        this.editItemFromState(result,keyId);
-      }
-      else { alert('Empty string') }
-    }
-  }*/
-
   render() {
     return (
       <div>

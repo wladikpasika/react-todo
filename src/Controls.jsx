@@ -2,14 +2,10 @@ import React, { Component } from 'react';
 
 class Controls extends Component {
 
-  constructor(props, context, updater) {
-    super(props, context, updater);
-
-    this.state = { value: '' };
-    this.handleInput = this.handleInput.bind(this);
-    this.handlePress = this.handlePress.bind(this);
-  }
-
+    state = { value: '' };
+    handleInput = this.handleInput.bind(this);
+    handlePress = this.handlePress.bind(this);
+ 
   handleInput(event) {
     const { value = '' } = event.target;
     this.setState({ value });

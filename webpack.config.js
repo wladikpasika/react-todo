@@ -19,71 +19,18 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        include: src,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          cacheDirectory: true,
-          presets: [
-            [
-              'env',
-              {
-                modules: false,
-                targets: ['last 2 versions']
-              }
-            ],
-            'react',
-            'stage-2'
-          ],
-          plugins: [
-            'transform-runtime'
-          ]
-        }
+        use: ['babel-loader']
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: [ 'style-loader', 'css-loader' ]
       }
-      // {
-      //   test: /\.jsx?$/,
-      //   exclude: /node_modules/,
-      //   use: {
-      //     loader: 'babel-loader',
-      //     options: {
-      //       presets: ["@babel/preset-env", "@babel/preset-react"],
-      //       plugins: ["babel-plugin-transform-runtime"]
-      //     }
-      //   }
-      // },
-      
     ]
   },
   devtool: NODE_ENV === 'development' ? 'source-map' : false,
-  plugins: [
-    new webpack.DefinePlugin({
-      NODE_ENV: JSON.stringify(NODE_ENV),
-      LANG: '"ru"'
-    }),
-    // new UglifyJsPlugin({
-    //     uglifyOptions: {
-    //         ie8: false,
-    //         ecma: 6,
-    //         output: {
-    //             comments: false,
-    //             beautify: false,
-    //         },
-    //         compress: {
-    //             drop_console: false,
-    //             unsafe: true
-    //         },
-    //     }
-    // }),
-    new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
-  ],
   devServer: {
     compress: true,
-    hot: true,
     port: 8080,
   }
 };
