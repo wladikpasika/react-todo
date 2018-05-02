@@ -2,19 +2,24 @@ import React, { Component } from 'react';
 
 class Controls extends Component {
 
-    state = { value: '' };
-    handleInput = this.handleInput.bind(this);
-    handlePress = this.handlePress.bind(this);
- 
-  handleInput(event) {
+  state = {
+    value: ''
+  }
+
+  handleInput = (event) => {
     const { value = '' } = event.target;
     this.setState({ value });
   }
 
-  handlePress() {
+  handlePress = () => {
     const { value } = this.state;
-    this.props.onPress(value);
-    this.setState({ value: '' });
+    if (!!value === true){
+      this.props.onAdd(value);
+      this.setState({ value: '' });
+    }
+    else {
+      alert('Empty Input!!!');
+    }
   }
 
   render() {
@@ -23,13 +28,11 @@ class Controls extends Component {
     return (
       <div>
         <input
-          placeholder = "Enter task"
-          onChange = {this.handleInput}
-          value = {value}
+          placeholder="Enter task"
+          onChange={this.handleInput}
+          value={value}
         />
-        <button
-          onClick={this.handlePress}
-        >
+        <button onClick={this.handlePress}>
           ADD
         </button>
       </div>
