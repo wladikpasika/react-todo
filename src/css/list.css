@@ -4,3 +4,8 @@
     margin:5px;
     color: blueviolet;
 }
+li.select {background: #ff000082}
+li.unselect:hover {background: #0037ff1f}
+li.select .fas.fa-times.close {
+    display:none
+}

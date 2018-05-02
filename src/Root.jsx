@@ -32,10 +32,13 @@ class Root extends Component {
     this.setState({ tasks: newItems });
   }
 
-  handleRemoveItem = (key) => {
+  handleRemoveItem = (keys) => {
     const { tasks } = this.state;
     const newItems = Object.assign({}, tasks);
-    delete newItems[key];
+    
+    keys.forEach((removedKey) => {
+      newItems[removedKey]?delete newItems[removedKey]:false
+    });
 
     this.setState({ tasks: newItems });
   }
@@ -58,61 +61,6 @@ class Root extends Component {
     );
   }
 }
-/*class Root extends Component {
-    state = {
-      tasks:{
-
-      }
-    };
-    counterForState = null;
-    handleAddItem = (value) => {
-
-      if(this.counterForState === null){ //check counterForState if null, set number 0, else - use incremnt 
-        this.counterForState = 0;
-      }
-      else {
-        this.counterForState +=1;
-      }
-      if(value){ // check value, if empty - skip
-        let newState = {...this.state.tasks}; //temporary state for a copy state
-        newState[this.counterForState]= value;
-        this.setState({tasks:newState}); 
-    }
-  }
-  removeItemFromState = (keyId) => {
-   
-    let newState = {...this.state.tasks}; //temporary state for a copy state
-
-      if(newState[keyId]){
-        delete newState[keyId];
-        return this.setState({tasks:newState} 
-        )
-      };
-  };
-
-  editItemFromState = (value,keyId) => {
-    
-    const newState = {...this.state.tasks}; //temporary state for a copy state 
-
-      if(newState[keyId]){
-        newState[keyId] = value;
-        return this.setState({tasks:newState} 
-        )
-      };
-  };
-  render() {
-    return (
-      <div>
-        <Controls onPress = {this.handleAddItem}/>
-        <List
-          tasks={this.state.tasks}
-          onEdit={this.editItemFromState}
-          onRemove={this.removeItemFromState}
-        />
-      </div>
-    );
-  }
-}*/
 
 export default Root;
 
